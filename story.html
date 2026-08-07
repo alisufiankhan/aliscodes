@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Attendance Bot Story | Ali Sufian</title>
+  <meta name="description" content="The story of how I automated my class attendance using Python, and why it was a bit illegal.">
+  <link rel="icon" type="image/png" href="assets/profile.png">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        ali sufian
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html#projects">projects</a></li>
+          <li><a href="index.html#services">services</a></li>
+          <li><a href="index.html#newsletter">newsletter</a></li>
+          <li><a href="mailto:alisufiancodes@gmail.com">contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Story Header -->
+    <article class="reveal active">
+      <div class="story-header">
+        <a href="index.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12,19 5,12 12,5"></polyline></svg>
+          back to home
+        </a>
+        <div class="story-meta">
+          <span>case study</span>
+          <span>&bull;</span>
+          <span>python automation</span>
+          <span>&bull;</span>
+          <span>3 min read</span>
+        </div>
+        <h1 class="story-title">How I Automated My Internship Attendance (And Why It Was Kinda Illegal)</h1>
+        <p class="story-intro">
+          A tale of summer vacations, mandated internships, a terrible memory, and a silent Python script that solved CAPTCHAs and faked coordinates.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Story Content -->
+      <div class="story-content">
+        <p>
+          It was summer vacation. But instead of sleeping in, the university required us to complete a mandatory internship and log our daily check-in and check-out times on the university LMS portal.
+        </p>
+        <p>
+          As a developer, my laptop was always open and I was working hard. But my memory was awful. I forgot to check in multiple times, made late check-ins when I was already deep in code, and regularly forgot to check out at the end of the day.
+        </p>
+        <p>
+          Fearing I'd lose credit for work I was actually doing just because I couldn't remember to click a button, my internal <em>"ADHD-driven urge to spend 8 hours automating a task that takes 2 seconds"</em> kicked in.
+        </p>
+        <p>
+          The result was the <strong>PAF-IAST LMS Attendance Bot</strong>.
+        </p>
+
+        <h2>The Anatomy of the Hack</h2>
+        <p>
+          To make the check-in bulletproof, I needed to automate three main steps:
+        </p>
+        <ol class="story-steps">
+          <li><strong>Auto CAPTCHA Solver</strong>: The LMS login portal required solving a security verification code. I integrated an OCR API to screenshot, read, and type in the captcha code automatically.</li>
+          <li><strong>Geolocation Injection</strong>: The LMS logged location. If I checked in from home, it would fail. I used Chrome DevTools Protocol to spoof my browser's GPS coordinates to match our internship location in Abbottabad.</li>
+          <li><strong>Silent Background Run</strong>: I wrapped the script in a windowless VBScript launcher and set up Windows Task Scheduler to run it silently twice a day, bypassing battery restrictions so it triggers even when my laptop is unplugged.</li>
+        </ol>
+
+        <!-- Interactive Demo Output Card -->
+        <div class="story-demo-card">
+          <div class="story-demo-header">
+            <span class="story-demo-title">⚡ Interactive Bot Execution Demo</span>
+            <button type="button" class="story-demo-btn" id="btn-run-sim">Run Test Execution</button>
+          </div>
+          <div class="story-demo-output" id="sim-log-box">
+            <div class="terminal-line info">[SYS] Ready. Click "Run Test Execution" to simulate the automated check-in process.</div>
+          </div>
+        </div>
+
+        <p>
+          Here's a simplified look at the Python logic that handles the geolocation spoofing and CAPTCHA bypass:
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-header">
+            <span class="code-title">attendance_bot.py</span>
+            <button type="button" class="copy-code-btn" id="copy-code-btn">Copy Code</button>
+          </div>
+<pre><code id="python-code"><span class="code-comment"># A simplified snippet of the geo-spoof and check-in logic</span>
+<span class="code-keyword">from</span> selenium <span class="code-keyword">import</span> webdriver
+<span class="code-keyword">from</span> selenium.webdriver.common.by <span class="code-keyword">import</span> By
+
+<span class="code-keyword">def</span> <span class="code-function">mark_attendance</span>(action):
+    options = webdriver.ChromeOptions()
+    options.add_argument(<span class="code-string">"--headless"</span>)
+    driver = webdriver.Chrome(options=options)
+    
+    <span class="code-comment"># Spoof geolocation coordinates to match the office in Abbottabad</span>
+    driver.execute_cdp_cmd(<span class="code-string">"Emulation.setGeolocationOverride"</span>, {
+        <span class="code-string">"latitude"</span>: 34.1688,
+        <span class="code-string">"longitude"</span>: 73.2215,
+        <span class="code-string">"accuracy"</span>: 100
+    })
+    
+    driver.get(<span class="code-string">"https://lms.university.edu/login"</span>)
+    
+    <span class="code-comment"># Captcha solving via OCR API screenshot</span>
+    captcha_img = driver.find_element(By.ID, <span class="code-string">"captcha"</span>).screenshot_as_png
+    captcha_code = solve_ocr(captcha_img)
+    
+    driver.find_element(By.ID, <span class="code-string">"username"</span>).send_keys(<span class="code-string">"student_id"</span>)
+    driver.find_element(By.ID, <span class="code-string">"password"</span>).send_keys(<span class="code-string">"lms_password"</span>)
+    driver.find_element(By.ID, <span class="code-string">"captcha_input"</span>).send_keys(captcha_code)
+    driver.find_element(By.ID, <span class="code-string">"login_btn"</span>).click()
+    
+    <span class="code-comment"># Click check-in / check-out button dynamically</span>
+    driver.find_element(By.CLASS_NAME, f<span class="code-string">"{action}-btn"</span>).click()
+    driver.quit()</code></pre>
+        </div>
+
+        <h2>Why it was "Kinda Illegal"</h2>
+        <p>
+          Strictly speaking, spoofing your browser's physical location and using automated agents to bypass security verifications like CAPTCHAs violates university and LMS terms of service. But as a project built for fun and convenience, it was a major success.
+        </p>
+        <p>
+          I went from missing check-ins to having a perfect, silent background agent that logged check-in and check-out times with absolute, computerized precision.
+        </p>
+
+        <h2>The Result</h2>
+        <p>
+          The repository is open source on GitHub: <a href="https://github.com/alisufiankhan/attendance-automation" target="_blank" rel="noopener noreferrer">attendance-automation</a>. 
+          Building this taught me how to bypass CAPTCHAs, inject browser overrides, and integrate windows tasks—all because of my terrible memory.
+        </p>
+        
+        <p class="story-disclaimer">
+          <em>disclaimer: i do not recommend using this. it is technically illegal and violates university lms rules. if you get caught, we never met. if you don't get caught, please endorse me for python automation on linkedin.</em>
+        </p>
+      </div>
+    </article>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-links">
+        <a href="https://x.com/aliscodes" target="_blank" rel="noopener noreferrer" class="social-link" title="X (Twitter)">
+          <svg viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/alisufiankhan" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <a href="https://instagram.com/alis.code" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/aliscodes/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+          <svg viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+      <p class="copyright">&copy; <span id="current-year"></span> Ali Sufian. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-notification" role="status" aria-live="polite">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-message">email copied: alisufiancodes@gmail.com</span>
+  </div>
+
+  <script src="main.js?v=2"></script>
+</body>
+</html>
