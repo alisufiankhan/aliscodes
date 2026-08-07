@@ -528,11 +528,10 @@ footer {
 .social-link svg {
   width: 18px;
   height: 18px;
-  fill: currentColor;
 }
 
-.copyright {
-  font-size: 0.75rem;
+.footer-copy p {
+  font-size: 0.775rem;
   color: var(--text-muted);
 }
 
