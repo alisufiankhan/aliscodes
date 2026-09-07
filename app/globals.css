@@ -425,57 +425,6 @@ section {
   font-weight: 700;
 }
 
-/* Content That Performed Section */
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 1.25rem;
-}
-
-.content-card {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  transition: border-color 0.15s ease;
-}
-
-.content-card:hover {
-  border-color: var(--border-medium);
-}
-
-.embed-preview-box {
-  height: 120px;
-  background-color: var(--bg-embed);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #78716c;
-}
-
-.content-info {
-  padding: 1.25rem;
-}
-
-.content-card-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.35rem;
-  line-height: 1.35;
-}
-
-.content-card-subtitle {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 450;
-}
 
 /* Things Built & Shipped */
 .projects-stack {
@@ -828,7 +777,7 @@ footer {
     border-bottom: none;
   }
 
-  .work-grid, .content-grid {
+  .work-grid {
     grid-template-columns: 1fr;
   }
   

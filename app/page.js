@@ -11,7 +11,6 @@ export default function Home() {
   
   // Modal states
   const [rateCardOpen, setRateCardOpen] = useState(false);
-  const [activeEmbedModal, setActiveEmbedModal] = useState(null);
 
   const handleCopyEmail = async () => {
     const email = 'alisufiancodes@gmail.com';
@@ -199,63 +198,6 @@ export default function Home() {
 
       <div className="divider"></div>
 
-      {/* 5. Content That Performed */}
-      <section>
-        <h2 className="section-title">content that performed</h2>
-        <p className="section-subtitle">the actual portfolio. embed the real posts here, not screenshots.</p>
-
-        <div className="content-grid">
-          {/* Item 1 */}
-          <div className="content-card" onClick={() => setActiveEmbedModal({
-            type: 'Reel Embed',
-            title: 'the mcp servers i actually use',
-            stats: '142.5K views • 8.4K likes • 1.2K shares',
-            embedInfo: 'Deep-dive reel breaking down real Model Context Protocol servers in production.'
-          })}>
-            <div className="embed-preview-box">
-              reel embed
-            </div>
-            <div className="content-info">
-              <h3 className="content-card-title">the mcp servers i actually use</h3>
-              <p className="content-card-subtitle">&mdash; your real views here</p>
-            </div>
-          </div>
-
-          {/* Item 2 */}
-          <div className="content-card" onClick={() => setActiveEmbedModal({
-            type: 'X Thread Embed',
-            title: '12 mcp servers, ranked honestly',
-            stats: '280.9K impressions • 3.1K retweets • 12.4K bookmarks',
-            embedInfo: 'Comprehensive ranking thread evaluating MCP servers based on real-world stability and usability.'
-          })}>
-            <div className="embed-preview-box">
-              x thread embed
-            </div>
-            <div className="content-info">
-              <h3 className="content-card-title">12 mcp servers, ranked honestly</h3>
-              <p className="content-card-subtitle">&mdash; your real impressions here</p>
-            </div>
-          </div>
-
-          {/* Item 3 */}
-          <div className="content-card" onClick={() => setActiveEmbedModal({
-            type: 'Newsletter Issue',
-            title: 'stackup ai &mdash; weekly',
-            stats: '18.5K active subscribers • 52% open rate',
-            embedInfo: 'Weekly deep dive into actionable AI tooling, hands-on tutorials, and breakdown of developer trends.'
-          })}>
-            <div className="embed-preview-box">
-              newsletter issue
-            </div>
-            <div className="content-info">
-              <h3 className="content-card-title">stackup ai &mdash; weekly</h3>
-              <p className="content-card-subtitle">every week, no misses</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="divider"></div>
 
       {/* 6. Things I've Built & Shipped */}
       <section id="built">
@@ -488,25 +430,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Embed Detail Modal */}
-      {activeEmbedModal && (
-        <div className="modal-overlay" onClick={() => setActiveEmbedModal(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setActiveEmbedModal(null)}>
-              &times;
-            </button>
-            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--accent-teal)', textTransform: 'uppercase', marginBottom: '0.5rem', display: 'block' }}>
-              {activeEmbedModal.type}
-            </span>
-            <h3 className="modal-title">{activeEmbedModal.title}</h3>
-            <p className="modal-subtitle" style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{activeEmbedModal.stats}</p>
-            <p className="work-card-desc" style={{ marginBottom: '1.5rem' }}>{activeEmbedModal.embedInfo}</p>
-            <button type="button" className="btn-primary" style={{ width: '100%' }} onClick={() => setActiveEmbedModal(null)}>
-              close preview
-            </button>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
