@@ -73,7 +73,7 @@ export default function Home() {
         </div>
 
         <h1 className="hero-headline">
-          i'm a developer who makes content about ai tools. <span className="highlight">80k people</span> follow along.
+          building apps, testing ai tools, and sharing it all with <span className="highlight">80k+ people</span>.
         </h1>
 
         <p className="hero-bio">
@@ -104,10 +104,6 @@ export default function Home() {
           <div className="stat-cell">
             <div className="stat-number">100+</div>
             <div className="stat-label">paid brand collabs</div>
-          </div>
-          <div className="stat-cell">
-            <div className="stat-number">55%</div>
-            <div className="stat-label">reel reach is non-followers</div>
           </div>
         </div>
       </div>
