@@ -801,4 +801,114 @@ footer {
   .footer-cta-actions {
     flex-direction: column;
   }
+
+  .vibe-player-widget {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* 2am Vibe-Coding Audio Widget */
+.vibe-player-widget {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 99;
+}
+
+.vibe-player-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 0.45rem 0.85rem 0.45rem 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.vibe-player-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.11);
+}
+
+.vibe-player-btn.playing {
+  border-color: rgba(12, 110, 120, 0.35);
+  box-shadow: 0 4px 20px rgba(12, 110, 120, 0.12), 0 0 0 1px rgba(12, 110, 120, 0.1);
+}
+
+.vibe-moon-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.vibe-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.vibe-bar {
+  width: 2.5px;
+  background-color: var(--accent-teal);
+  border-radius: 1px;
+  animation: vibeBounce 1.2s ease-in-out infinite alternate;
+}
+
+.vibe-bar.bar-1 {
+  height: 12px;
+  animation-delay: 0s;
+}
+
+.vibe-bar.bar-2 {
+  height: 8px;
+  animation-delay: 0.25s;
+}
+
+.vibe-bar.bar-3 {
+  height: 10px;
+  animation-delay: 0.5s;
+}
+
+@keyframes vibeBounce {
+  0% {
+    transform: scaleY(0.25);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.vibe-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.vibe-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  background: #f3f4f6;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+.vibe-player-btn.playing .vibe-badge {
+  background: #e6f4f6;
+  color: var(--accent-teal);
 }

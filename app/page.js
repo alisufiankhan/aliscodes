@@ -371,6 +371,13 @@ export default function Home() {
               className={`love-chip-wrapper ${hoverImage === item.image ? 'active' : ''}`}
               onMouseEnter={() => setHoverImage(item.image)}
               onMouseLeave={() => setHoverImage(null)}
+              onClick={() => {
+                if (item.id === 'vibecoding') {
+                  window.dispatchEvent(new CustomEvent('toggle-vibecoding-audio'));
+                }
+              }}
+              style={item.id === 'vibecoding' ? { cursor: 'pointer' } : {}}
+              title={item.id === 'vibecoding' ? 'Click to toggle 2am vibe-coding mode 🎧' : undefined}
             >
               {hoverImage === item.image && (
                 <div className="love-card-popup">
