@@ -441,11 +441,12 @@ section {
   padding: 1.4rem 1.6rem;
   text-decoration: none;
   display: block;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .project-row:hover {
   border-color: var(--border-medium);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .project-row-header {
@@ -460,6 +461,22 @@ section {
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.project-arrow-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-light-muted);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.project-row:hover .project-arrow-icon {
+  transform: translate(2.5px, -2.5px);
+  color: var(--accent-teal);
 }
 
 .badge-status {

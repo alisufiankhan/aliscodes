@@ -213,7 +213,13 @@ export default function Home() {
             className="project-row"
           >
             <div className="project-row-header">
-              <h3 className="project-row-title">screensnipper.app</h3>
+              <h3 className="project-row-title">
+                screensnipper.app
+                <svg className="project-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </h3>
               <span className="badge-status status-live">live</span>
             </div>
             <p className="project-row-desc">
@@ -229,7 +235,13 @@ export default function Home() {
             className="project-row"
           >
             <div className="project-row-header">
-              <h3 className="project-row-title">completemysaas.com</h3>
+              <h3 className="project-row-title">
+                completemysaas.com
+                <svg className="project-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </h3>
               <span className="badge-status status-live">live</span>
             </div>
             <p className="project-row-desc">
@@ -256,7 +268,13 @@ export default function Home() {
             className="project-row"
           >
             <div className="project-row-header">
-              <h3 className="project-row-title">whatsapp privacy extension</h3>
+              <h3 className="project-row-title">
+                whatsapp privacy extension
+                <svg className="project-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </h3>
               <span className="badge-status status-free">free</span>
             </div>
             <p className="project-row-desc">
