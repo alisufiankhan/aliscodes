@@ -459,7 +459,7 @@ export default function Home() {
               &times;
             </button>
             <h3 className="modal-title">rate card & media kit</h3>
-            <p className="modal-subtitle">ali sufian &bull; 80k+ cross-platform developer audience</p>
+            <p className="modal-subtitle">ali sufian &bull; 80k+ cross-platform audience</p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
               <div style={{ background: '#f9fafb', padding: '0.85rem 1rem', borderRadius: '6px', border: '1px solid #e5e7eb' }}>
