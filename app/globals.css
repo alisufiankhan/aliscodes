@@ -1108,9 +1108,40 @@ body.screenbar-active .spotlight-card::before {
 }
 
 body.screenbar-active .vibe-player-btn {
-  background: rgba(22, 27, 34, 0.92) !important;
+  background: rgba(22, 27, 34, 0.95) !important;
   border-color: #30363d !important;
   color: #f0f6fc !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.screenbar-active .vibe-player-btn:hover {
+  background: rgba(30, 36, 45, 0.98) !important;
+  border-color: #484f58 !important;
+}
+
+body.screenbar-active .vibe-label {
+  color: #f0f6fc !important;
+}
+
+body.screenbar-active .vibe-moon-icon {
+  color: #94a3b8 !important;
+}
+
+body.screenbar-active .vibe-badge {
+  background: #21262d !important;
+  border: 1px solid #30363d !important;
+  color: #c9d1d9 !important;
+}
+
+body.screenbar-active .vibe-player-btn.playing {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(56, 189, 248, 0.25) !important;
+}
+
+body.screenbar-active .vibe-player-btn.playing .vibe-badge {
+  background: rgba(12, 110, 120, 0.45) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #38bdf8 !important;
 }
 
 /* Film Grain Overlay */
@@ -1130,7 +1161,15 @@ body.screenbar-active .grain-overlay {
   opacity: 0.04;
 }
 
-/* Hero Live Time & Status Pill */
+/* Hero Badges Row & Live Status Pill */
+.hero-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.65rem;
+}
+
 .hero-live-status {
   display: inline-flex;
   align-items: center;
@@ -1138,12 +1177,42 @@ body.screenbar-active .grain-overlay {
   font-size: 0.78rem;
   font-weight: 550;
   color: var(--text-muted);
-  margin-top: 0.55rem;
   padding: 0.22rem 0.65rem 0.22rem 0.5rem;
   background: #f9fafb;
   border: 1px solid var(--border-color);
   border-radius: 9999px;
   width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.hero-seconds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.22rem 0.7rem 0.22rem 0.55rem;
+  background: #f9fafb;
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.hero-seconds-pill .seconds-val {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-weight: 650;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-seconds-pill .seconds-live-icon {
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .live-status-dot {
@@ -1177,30 +1246,33 @@ body.screenbar-active .hero-live-status {
   color: #8b949e;
 }
 
-/* Hero Handwritten Annotation */
-.hero-handwritten-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+body.screenbar-active .hero-seconds-pill {
+  background: #161b22 !important;
+  border-color: #30363d !important;
+  color: #8b949e !important;
+}
+
+body.screenbar-active .hero-seconds-pill .seconds-val {
+  color: #fde047 !important;
+}
+
+/* Hero Embedded Handwriting Accent */
+.hero-handwriting-accent {
   font-family: var(--font-handwriting);
-  font-size: 1.45rem;
-  font-weight: 500;
-  color: var(--accent-teal);
-  margin-top: 0.65rem;
-  line-height: 1.15;
-  transform: rotate(-1.5deg);
+  font-size: 1.18em;
+  font-weight: 600;
+  color: #b45309;
   text-transform: none !important;
-  letter-spacing: 0.01em;
-}
-
-.handwritten-arrow {
-  font-size: 1.25rem;
   display: inline-block;
-  transform: translateY(-2px);
+  transform: rotate(-1.5deg);
+  margin: 0 0.18rem;
+  letter-spacing: 0.01em;
+  transition: color 0.3s ease;
 }
 
-body.screenbar-active .hero-handwritten-note {
-  color: #fde047;
+body.screenbar-active .hero-handwriting-accent {
+  color: #fde047 !important;
+  text-shadow: 0 0 16px rgba(253, 224, 71, 0.3);
 }
 
 /* Handwritten Digital Sign-off Section */

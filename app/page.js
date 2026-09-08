@@ -13,6 +13,21 @@ export default function Home() {
   const [localTime, setLocalTime] = useState('');
   const [statusText, setStatusText] = useState('building software');
 
+  // Fun live seconds counter since Aug 14, 2007 (PKT)
+  const [secondsAlive, setSecondsAlive] = useState(null);
+
+  useEffect(() => {
+    // Aug 14, 2007 00:00:00 PKT (UTC+5)
+    const START_DATE = new Date('2007-08-14T00:00:00+05:00').getTime();
+    const updateSeconds = () => {
+      const now = Date.now();
+      setSecondsAlive(Math.max(0, Math.floor((now - START_DATE) / 1000)));
+    };
+    updateSeconds();
+    const timer = setInterval(updateSeconds, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   // Modal states
   const [rateCardOpen, setRateCardOpen] = useState(false);
 
@@ -118,20 +133,27 @@ export default function Home() {
           <div className="hero-info">
             <h2 className="hero-name">ali sufian</h2>
             <p className="hero-tag">i build software and make content about ai tools</p>
-            {localTime && (
-              <div className="hero-live-status">
-                <span className="live-status-dot"></span>
-                <span>karachi • {localTime} ({statusText})</span>
-              </div>
-            )}
+            <div className="hero-badges-row">
+              {localTime && (
+                <div className="hero-live-status">
+                  <span className="live-status-dot"></span>
+                  <span>islamabad • {localTime} ({statusText})</span>
+                </div>
+              )}
+              {secondsAlive !== null && (
+                <div className="hero-seconds-pill" title="Live counter: seconds since August 14, 2007">
+                  <span className="seconds-live-icon">⏳</span>
+                  <span className="seconds-counter-text">
+                    <span className="seconds-val">{secondsAlive.toLocaleString()}</span> seconds since aug 14, 2007
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <h1 className="hero-headline">
-          building apps, testing ai tools, and sharing it all with <span className="highlight">80k+ people</span>.
-          <span className="hero-handwritten-note">
-            <span className="handwritten-arrow">↳</span> real builders & founders, zero hype
-          </span>
+          building apps, <span className="hero-handwriting-accent">testing ai tools</span>, and sharing it all with <span className="highlight">80k+ people</span>.
         </h1>
 
         <p className="hero-bio">
