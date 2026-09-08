@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useToast } from './Toast';
 
 export default function VibeCodingAudio() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const { showToast } = useToast();
   
   const audioCtxRef = useRef(null);
   const masterGainRef = useRef(null);
@@ -177,10 +175,8 @@ export default function VibeCodingAudio() {
 
       setIsPlaying(true);
       isPlayingRef.current = true;
-      showToast('🎧 2am vibe-coding active: lofi chords + mechanical clicks');
     } catch (err) {
       console.error('Audio start error:', err);
-      showToast('Click again to activate audio');
     }
   };
 
@@ -224,7 +220,6 @@ export default function VibeCodingAudio() {
   const toggleAudio = () => {
     if (isPlaying) {
       stopAudio();
-      showToast('2am vibe-coding paused');
     } else {
       startAudio();
     }
