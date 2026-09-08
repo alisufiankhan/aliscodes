@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useToast } from '../components/Toast';
+import MagneticButton from '../components/MagneticButton';
+import GravityChips from '../components/GravityChips';
 
 export default function Home() {
   const { showToast } = useToast();
@@ -54,6 +56,16 @@ export default function Home() {
 
   const handleMouseMove = (e) => {
     setMousePos({ x: e.clientX, y: e.clientY });
+
+    // Update cursor spotlight position on all spotlight-card elements
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
   };
 
   return (
@@ -80,27 +92,31 @@ export default function Home() {
         </p>
 
         <div className="hero-cta-group">
-          <a href="#work" className="btn-primary">
-            work with me
-          </a>
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={() => setRateCardOpen(true)}
-          >
-            see the rate card
-          </button>
+          <MagneticButton strength={0.3}>
+            <a href="#work" className="btn-primary">
+              work with me
+            </a>
+          </MagneticButton>
+          <MagneticButton strength={0.3}>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => setRateCardOpen(true)}
+            >
+              see the rate card
+            </button>
+          </MagneticButton>
         </div>
       </section>
 
       {/* 2. Key Stats Bar */}
       <div className="stats-container">
         <div className="stats-grid">
-          <div className="stat-cell">
+          <div className="stat-cell spotlight-card">
             <div className="stat-number">80k</div>
             <div className="stat-label">across x, instagram & linkedin</div>
           </div>
-          <div className="stat-cell">
+          <div className="stat-cell spotlight-card">
             <div className="stat-number">100+</div>
             <div className="stat-label">paid brand collabs</div>
           </div>
@@ -141,7 +157,7 @@ export default function Home() {
 
         <div id="rates" className="work-grid">
           {/* Card 1: For AI Brands */}
-          <div className="work-card">
+          <div className="work-card spotlight-card">
             <div>
               <span className="work-card-tag tag-brands">FOR AI BRANDS</span>
               <h3 className="work-card-title">sponsored content that gets used</h3>
@@ -155,19 +171,21 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <button
-                type="button"
-                className="btn-primary"
-                style={{ width: '100%' }}
-                onClick={() => setRateCardOpen(true)}
-              >
-                get the media kit
-              </button>
+              <MagneticButton strength={0.25} style={{ width: '100%' }}>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  style={{ width: '100%' }}
+                  onClick={() => setRateCardOpen(true)}
+                >
+                  get the media kit
+                </button>
+              </MagneticButton>
             </div>
           </div>
 
           {/* Card 2: For Founders */}
-          <div className="work-card">
+          <div className="work-card spotlight-card">
             <div>
               <span className="work-card-tag tag-founders">FOR FOUNDERS</span>
               <h3 className="work-card-title">your ai-built saas is broken</h3>
@@ -181,16 +199,18 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <button
-                type="button"
-                className="btn-secondary"
-                style={{ width: '100%' }}
-                data-cal-link="alis-sufian/mvp-building"
-                data-cal-namespace="mvp-building"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-              >
-                book a scope call
-              </button>
+              <MagneticButton strength={0.25} style={{ width: '100%' }}>
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  style={{ width: '100%' }}
+                  data-cal-link="alis-sufian/mvp-building"
+                  data-cal-namespace="mvp-building"
+                  data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                >
+                  book a scope call
+                </button>
+              </MagneticButton>
             </div>
           </div>
         </div>
@@ -210,7 +230,7 @@ export default function Home() {
             href="https://screensnipper.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="project-row"
+            className="project-row spotlight-card"
           >
             <div className="project-row-header">
               <h3 className="project-row-title">
@@ -232,7 +252,7 @@ export default function Home() {
             href="https://completemysaas.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="project-row"
+            className="project-row spotlight-card"
           >
             <div className="project-row-header">
               <h3 className="project-row-title">
@@ -250,7 +270,7 @@ export default function Home() {
           </a>
 
           {/* Project 3 */}
-          <div className="project-row">
+          <div className="project-row spotlight-card">
             <div className="project-row-header">
               <h3 className="project-row-title">stackup ai</h3>
               <span className="badge-status status-weekly">weekly</span>
@@ -265,7 +285,7 @@ export default function Home() {
             href="https://whatsapp-privacy-extension.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="project-row"
+            className="project-row spotlight-card"
           >
             <div className="project-row-header">
               <h3 className="project-row-title">
@@ -284,114 +304,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Things I Love Section */}
+      {/* 7. Things I Love Section with Gravity Physics */}
       <section className="things-love-section">
-        <h2 className="section-title" style={{ marginBottom: '1.25rem' }}>things i love</h2>
-        <div className="love-chips-cloud">
-          {[
-            {
-              id: 'python',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              ),
-              label: 'python',
-              image: '/assets/python.webp',
-            },
-            {
-              id: 'ollie',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                  <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                  <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                </svg>
-              ),
-              label: 'ollie',
-              image: '/assets/Ollie.webp',
-            },
-            {
-              id: 'vibecoding',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-              ),
-              label: '2am vibe-coding',
-              image: '/assets/vibecoding.png',
-            },
-            {
-              id: 'aitools',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-              ),
-              label: 'useful ai tools',
-              image: '/assets/ai tools.png',
-            },
-            {
-              id: 'food',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              ),
-              label: 'beef biryaani & grilled chicken',
-              image: '/assets/beef biryanii.png',
-            },
-            {
-              id: 'claude',
-              icon: (
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-              ),
-              label: 'claude',
-              image: '/assets/claudeee.png',
-            },
-            {
-              id: 'porsche',
-              icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"></path>
-                  <circle cx="7" cy="17" r="2"></circle>
-                  <circle cx="17" cy="17" r="2"></circle>
-                </svg>
-              ),
-              label: 'porsche 911 gt3',
-              image: '/assets/porsche 911.png',
-            },
-          ].map((item) => (
-            <div
-              key={item.id}
-              className={`love-chip-wrapper ${hoverImage === item.image ? 'active' : ''}`}
-              onMouseEnter={() => setHoverImage(item.image)}
-              onMouseLeave={() => setHoverImage(null)}
-              onClick={() => {
-                if (item.id === 'vibecoding') {
-                  window.dispatchEvent(new CustomEvent('toggle-vibecoding-audio'));
-                }
-              }}
-              style={item.id === 'vibecoding' ? { cursor: 'pointer' } : {}}
-              title={item.id === 'vibecoding' ? 'Click to toggle 2am vibe-coding mode 🎧' : undefined}
-            >
-              {hoverImage === item.image && (
-                <div className="love-card-popup">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.image} alt={item.label} className="love-card-img" />
-                </div>
-              )}
-              <div className="love-chip">
-                <span className="love-chip-icon">{item.icon}</span>
-                <span>{item.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <GravityChips hoverImage={hoverImage} setHoverImage={setHoverImage} />
       </section>
 
       {/* 8. Footer CTA Banner */}
@@ -399,21 +314,25 @@ export default function Home() {
         <h2 className="footer-cta-title">got a tool you want in front of 80k people?</h2>
         <p className="footer-cta-desc">reply time is usually under a day. rate card sent on request.</p>
         <div className="footer-cta-actions">
-          <button
-            type="button"
-            className="btn-banner-white"
-            onClick={handleCopyEmail}
-          >
-            {copyText}
-          </button>
-          <a
-            href="https://x.com/aliscodes"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-banner-dark"
-          >
-            dm on x
-          </a>
+          <MagneticButton strength={0.3}>
+            <button
+              type="button"
+              className="btn-banner-white"
+              onClick={handleCopyEmail}
+            >
+              {copyText}
+            </button>
+          </MagneticButton>
+          <MagneticButton strength={0.3}>
+            <a
+              href="https://x.com/aliscodes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-banner-dark"
+            >
+              dm on x
+            </a>
+          </MagneticButton>
         </div>
       </div>
 

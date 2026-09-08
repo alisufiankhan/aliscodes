@@ -912,3 +912,339 @@ footer {
   background: #e6f4f6;
   color: var(--accent-teal);
 }
+
+/* Spotlight Card System (Linear / Stripe Craft) */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: -1000px;
+  --mouse-y: -1000px;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mouse-x) var(--mouse-y),
+    rgba(12, 110, 120, 0.05),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    280px circle at var(--mouse-x) var(--mouse-y),
+    rgba(12, 110, 120, 0.45),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ScreenBar Monitor Light & 2am Room Atmosphere */
+.screenbar-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screenbar-fixture {
+  pointer-events: auto;
+  position: relative;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  width: 240px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.screenbar-fixture:hover {
+  height: 16px;
+  background: #27272a;
+}
+
+.screenbar-led-strip {
+  position: absolute;
+  bottom: 1px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: #3f3f46;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.screenbar-fixture.on .screenbar-led-strip {
+  background: #fef08a;
+  box-shadow: 0 0 10px #fde047, 0 0 20px rgba(253, 224, 71, 0.8);
+}
+
+.screenbar-power-dot {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #71717a;
+  transition: all 0.3s ease;
+}
+
+.screenbar-fixture.on .screenbar-power-dot {
+  background: #22c55e;
+  box-shadow: 0 0 6px #4ade80;
+}
+
+.screenbar-hint {
+  position: absolute;
+  top: 18px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #f4f4f5;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.screenbar-fixture:hover .screenbar-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Realistic Ambient Light Cone */
+.screenbar-light-cone {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 85vh;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 550px at 50% 0%,
+    rgba(254, 240, 138, 0.16) 0%,
+    rgba(253, 224, 71, 0.06) 45%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
+}
+
+.screenbar-light-cone.active {
+  opacity: 1;
+}
+
+/* Body Dark Ambient Transition when ScreenBar is Active */
+body.screenbar-active {
+  background-color: #0d1117 !important;
+  color: #f0f6fc !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.screenbar-active header {
+  background: rgba(13, 17, 23, 0.85) !important;
+  border-bottom-color: #30363d !important;
+  backdrop-filter: blur(12px);
+}
+
+body.screenbar-active .logo {
+  color: #f0f6fc !important;
+}
+
+body.screenbar-active nav ul li a {
+  color: #8b949e !important;
+}
+
+body.screenbar-active nav ul li a:hover {
+  color: #f0f6fc !important;
+}
+
+body.screenbar-active .hero-name,
+body.screenbar-active .hero-headline,
+body.screenbar-active .section-title,
+body.screenbar-active .work-card-title,
+body.screenbar-active .project-row-title,
+body.screenbar-active .stat-number {
+  color: #f0f6fc !important;
+}
+
+body.screenbar-active .hero-tag,
+body.screenbar-active .hero-bio,
+body.screenbar-active .section-subtitle,
+body.screenbar-active .work-card-desc,
+body.screenbar-active .project-row-desc,
+body.screenbar-active .stat-label,
+body.screenbar-active .brands-title {
+  color: #8b949e !important;
+}
+
+body.screenbar-active .work-card,
+body.screenbar-active .project-row {
+  background: #161b22 !important;
+  border-color: #30363d !important;
+}
+
+body.screenbar-active .brand-chip {
+  background: #161b22 !important;
+  border-color: #30363d !important;
+  color: #c9d1d9 !important;
+}
+
+body.screenbar-active .stats-container,
+body.screenbar-active .stat-cell,
+body.screenbar-active .divider {
+  border-color: #30363d !important;
+}
+
+body.screenbar-active .love-chip {
+  background: #161b22 !important;
+  border-color: #30363d !important;
+  color: #c9d1d9 !important;
+}
+
+body.screenbar-active .spotlight-card::after {
+  background: radial-gradient(
+    280px circle at var(--mouse-x) var(--mouse-y),
+    rgba(253, 224, 71, 0.45),
+    transparent 70%
+  ) !important;
+}
+
+body.screenbar-active .spotlight-card::before {
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(254, 240, 138, 0.05),
+    transparent 60%
+  ) !important;
+}
+
+body.screenbar-active .vibe-player-btn {
+  background: rgba(22, 27, 34, 0.92) !important;
+  border-color: #30363d !important;
+  color: #f0f6fc !important;
+}
+
+/* Gravity Chips Physics Section */
+.gravity-section-wrapper {
+  margin-top: 1rem;
+}
+
+.gravity-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.btn-gravity-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #f3f4f6;
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-gravity-toggle:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.btn-gravity-toggle.active {
+  background: #e6f4f6;
+  border-color: rgba(12, 110, 120, 0.35);
+  color: var(--accent-teal);
+}
+
+.gravity-active-arena {
+  position: relative;
+  min-height: 320px;
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.015);
+  overflow: hidden;
+}
+
+body.screenbar-active .gravity-active-arena {
+  border-color: #30363d;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+body.screenbar-active .btn-gravity-toggle {
+  background: #161b22;
+  border-color: #30363d;
+  color: #8b949e;
+}
+
+body.screenbar-active .btn-gravity-toggle:hover {
+  background: #21262d;
+  color: #f0f6fc;
+}
+
+.physics-chip {
+  cursor: grab !important;
+  user-select: none;
+  touch-action: none;
+}
+
+.physics-chip:active {
+  cursor: grabbing !important;
+}

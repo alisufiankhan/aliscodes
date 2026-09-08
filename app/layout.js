@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { ToastProvider } from '../components/Toast';
 import CalScript from '../components/CalScript';
 import VibeCodingAudio from '../components/VibeCodingAudio';
+import ScreenBar from '../components/ScreenBar';
 
 export const metadata = {
   title: 'Ali Sufian | Content Creator, Entrepreneur & Builder',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ToastProvider>
+          <ScreenBar />
           <Navbar />
           <div className="container">
             {children}
