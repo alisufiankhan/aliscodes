@@ -3,6 +3,39 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '../components/Toast';
 
+// Fun live milliseconds on earth counter (since Aug 14, 2007 PKT)
+function EarthMillisecondsCounter() {
+  const [msAlive, setMsAlive] = useState(null);
+
+  useEffect(() => {
+    // Aug 14, 2007 00:00:00 PKT (UTC+5)
+    const START_DATE = new Date('2007-08-14T00:00:00+05:00').getTime();
+    const update = () => {
+      setMsAlive(Date.now() - START_DATE);
+    };
+    update();
+    const timer = setInterval(update, 40);
+    return () => clearInterval(timer);
+  }, []);
+
+  if (msAlive === null) return null;
+
+  return (
+    <div className="hero-seconds-pill" title="Live milliseconds on earth (since August 14, 2007)">
+      <span className="seconds-live-icon" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </span>
+      <span className="seconds-counter-text">
+        <span className="seconds-val">{msAlive.toLocaleString()}</span> millisec here on earth
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   const { showToast } = useToast();
   const [copyText, setCopyText] = useState('copy email');
@@ -12,21 +45,6 @@ export default function Home() {
   // Live time and status
   const [localTime, setLocalTime] = useState('');
   const [statusText, setStatusText] = useState('building software');
-
-  // Fun live seconds counter since Aug 14, 2007 (PKT)
-  const [secondsAlive, setSecondsAlive] = useState(null);
-
-  useEffect(() => {
-    // Aug 14, 2007 00:00:00 PKT (UTC+5)
-    const START_DATE = new Date('2007-08-14T00:00:00+05:00').getTime();
-    const updateSeconds = () => {
-      const now = Date.now();
-      setSecondsAlive(Math.max(0, Math.floor((now - START_DATE) / 1000)));
-    };
-    updateSeconds();
-    const timer = setInterval(updateSeconds, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   // Modal states
   const [rateCardOpen, setRateCardOpen] = useState(false);
@@ -140,14 +158,7 @@ export default function Home() {
                   <span>islamabad • {localTime} ({statusText})</span>
                 </div>
               )}
-              {secondsAlive !== null && (
-                <div className="hero-seconds-pill" title="Live counter: seconds since August 14, 2007">
-                  <span className="seconds-live-icon">⏳</span>
-                  <span className="seconds-counter-text">
-                    <span className="seconds-val">{secondsAlive.toLocaleString()}</span> seconds since aug 14, 2007
-                  </span>
-                </div>
-              )}
+              <EarthMillisecondsCounter />
             </div>
           </div>
         </div>

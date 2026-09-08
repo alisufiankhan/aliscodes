@@ -1197,7 +1197,13 @@ body.screenbar-active .grain-overlay {
   border: 1px solid var(--border-color);
   border-radius: 9999px;
   width: fit-content;
+  white-space: nowrap;
   transition: all 0.2s ease;
+}
+
+.hero-seconds-pill .seconds-counter-text {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
 .hero-seconds-pill .seconds-val {
@@ -1210,9 +1216,15 @@ body.screenbar-active .grain-overlay {
 }
 
 .hero-seconds-pill .seconds-live-icon {
-  font-size: 0.8rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  color: var(--accent-teal);
+  flex-shrink: 0;
+}
+
+.hero-seconds-pill .seconds-live-icon svg {
+  display: block;
 }
 
 .live-status-dot {
