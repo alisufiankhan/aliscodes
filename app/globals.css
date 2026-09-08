@@ -799,14 +799,36 @@ footer {
   padding: 1.5rem;
 }
 
+/* Modal Overlay & Rate Card System */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+}
+
 .modal-content {
-  background: #ffffff;
+  background: #161b22;
+  border: 1px solid #30363d;
   border-radius: var(--radius-lg);
   padding: 2rem;
   max-width: 480px;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+  color: #f0f6fc;
 }
 
 .modal-close {
@@ -815,55 +837,109 @@ footer {
   right: 1.25rem;
   background: transparent;
   border: none;
-  color: var(--text-muted);
+  color: #8b949e;
   font-size: 1.5rem;
   cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.modal-close:hover {
+  color: #f0f6fc;
 }
 
 .modal-title {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.4rem;
+  color: #f0f6fc;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
 }
 
 .modal-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.88rem;
+  color: #8b949e;
   margin-bottom: 1.5rem;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .hero-headline {
-    font-size: 1.85rem;
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .stat-cell {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .stat-cell:last-child {
-    border-bottom: none;
-  }
+.modal-tiers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
 
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-cta-actions {
-    flex-direction: column;
-  }
+.modal-tier-card {
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  transition: border-color 0.15s ease;
+}
 
-  .vibe-player-widget {
-    bottom: 1rem;
-    right: 1rem;
-  }
+.modal-tier-card:hover {
+  border-color: #484f58;
+}
+
+.modal-tier-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal-tier-title.text-teal {
+  color: var(--accent-teal);
+}
+
+.modal-tier-title.text-amber {
+  color: #fbbf24;
+}
+
+.modal-tier-desc {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.45;
+}
+
+.modal-tier-desc strong {
+  color: #f0f6fc;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.modal-action-btn {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Light mode support for modal */
+body:not(.screenbar-active) .modal-content {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+body:not(.screenbar-active) .modal-title {
+  color: var(--text-primary);
+}
+
+body:not(.screenbar-active) .modal-tier-card {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+body:not(.screenbar-active) .modal-tier-desc {
+  color: var(--text-secondary);
+}
+
+body:not(.screenbar-active) .modal-tier-desc strong {
+  color: var(--text-primary);
 }
 
 /* 2am Vibe-Coding Audio Widget */
@@ -1391,4 +1467,302 @@ body.screenbar-active .handwritten-signoff-note {
 
 body.screenbar-active .handwritten-signature {
   color: #f0f6fc;
+}
+
+/* ==========================================================================
+   Comprehensive Mobile Responsiveness (Tablets & Mobile: 320px - 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-headline {
+    font-size: 1.85rem;
+    line-height: 1.25;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .stat-cell {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.35rem 1rem;
+  }
+
+  body.screenbar-active .stat-cell {
+    border-bottom-color: #30363d !important;
+  }
+
+  .stat-cell:last-child {
+    border-bottom: none;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .work-card {
+    padding: 1.5rem 1.35rem;
+  }
+
+  .project-row {
+    padding: 1.25rem 1.35rem;
+  }
+
+  .footer-cta-banner {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .footer-cta-actions {
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .btn-banner-white,
+  .btn-banner-dark {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Header & Navigation */
+  .nav-container {
+    height: 60px;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .nav-link-desktop {
+    display: none !important;
+  }
+
+  nav ul {
+    gap: 0.5rem;
+  }
+
+  .nav-theme-toggle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav-btn {
+    padding: 7px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* Hero Section Stacking & Badges */
+  .hero-profile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .profile-avatar-circle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .hero-info .hero-name {
+    font-size: 1.22rem;
+  }
+
+  .hero-info .hero-tag {
+    font-size: 0.88rem;
+  }
+
+  .hero-badges-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    width: 100%;
+    margin-top: 0.55rem;
+  }
+
+  .hero-live-status,
+  .hero-seconds-pill {
+    max-width: 100%;
+    font-size: 0.74rem;
+    padding: 0.22rem 0.6rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .hero-headline {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .hero-handwriting-accent {
+    font-size: 1.12em;
+    margin: 0 0.1rem;
+  }
+
+  .hero-bio {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Hero CTAs */
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 11px 18px;
+    font-size: 0.9rem;
+  }
+
+  /* Brands Grid */
+  .brands-grid {
+    gap: 0.45rem;
+  }
+
+  .brand-chip {
+    padding: 0.38rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  /* Project Row Header */
+  .project-row-header {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-row-title {
+    font-size: 1.05rem;
+  }
+
+  /* Things I Love Cloud & Popups */
+  .love-chips-cloud {
+    gap: 0.5rem 0.4rem;
+  }
+
+  .love-chip {
+    padding: 0.38rem 0.8rem;
+    font-size: 0.84rem;
+  }
+
+  .love-card-popup {
+    max-width: min(280px, 82vw);
+  }
+
+  .love-card-img {
+    max-width: min(260px, 78vw);
+    max-height: 150px;
+  }
+
+  /* Handwritten Sign-off */
+  .handwritten-signoff-section {
+    margin: 2.25rem 0 0.5rem;
+    padding: 1rem 0 0.25rem;
+  }
+
+  .handwritten-signoff-note {
+    font-size: 1.22rem;
+  }
+
+  .handwritten-signature {
+    font-size: 1.75rem;
+  }
+
+  /* Footer Banner */
+  .footer-cta-banner {
+    padding: 1.75rem 1.15rem;
+    margin: 1.25rem 0 2rem;
+  }
+
+  .footer-cta-title {
+    font-size: 1.25rem;
+  }
+
+  .footer-cta-desc {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* 2am Vibe Audio Button */
+  .vibe-player-widget {
+    bottom: 0.85rem;
+    right: 0.85rem;
+  }
+
+  .vibe-player-btn {
+    padding: 0.38rem 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .vibe-label {
+    font-size: 0.73rem;
+  }
+
+  .vibe-badge {
+    font-size: 0.62rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  /* Rate Card Modal */
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem 1.15rem;
+    max-height: 92vh;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-headline {
+    font-size: 1.38rem;
+  }
+
+  .hero-live-status,
+  .hero-seconds-pill {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.85rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
 }

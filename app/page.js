@@ -525,26 +525,26 @@ export default function Home() {
             <h3 className="modal-title">rate card & media kit</h3>
             <p className="modal-subtitle">ali sufian &bull; 80k+ cross-platform audience</p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
-              <div style={{ background: '#f9fafb', padding: '0.85rem 1rem', borderRadius: '6px', border: '1px solid #e5e7eb' }}>
-                <div style={{ fontWeight: '700', color: 'var(--accent-teal)', marginBottom: '0.2rem' }}>X (Twitter) Post</div>
-                <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>Dedicated thread / post showcasing your tool: <strong>From $150</strong></div>
+            <div className="modal-tiers-list">
+              <div className="modal-tier-card">
+                <div className="modal-tier-title text-teal">X (Twitter) Post</div>
+                <div className="modal-tier-desc">Dedicated thread / post showcasing your tool: <strong>From $150</strong></div>
               </div>
-              <div style={{ background: '#f9fafb', padding: '0.85rem 1rem', borderRadius: '6px', border: '1px solid #e5e7eb' }}>
-                <div style={{ fontWeight: '700', color: 'var(--accent-teal)', marginBottom: '0.2rem' }}>Instagram Reel</div>
-                <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>High-engagement short video demo with real build: <strong>From $200</strong></div>
+              <div className="modal-tier-card">
+                <div className="modal-tier-title text-teal">Instagram Reel</div>
+                <div className="modal-tier-desc">High-engagement short video demo with real build: <strong>From $200</strong></div>
               </div>
-              <div style={{ background: '#f9fafb', padding: '0.85rem 1rem', borderRadius: '6px', border: '1px solid #e5e7eb' }}>
-                <div style={{ fontWeight: '700', color: 'var(--accent-amber)', marginBottom: '0.2rem' }}>Multi-Platform Package</div>
-                <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>X Thread + IG Reel + Newsletter feature: <strong>From $500</strong></div>
+              <div className="modal-tier-card">
+                <div className="modal-tier-title text-amber">Multi-Platform Package</div>
+                <div className="modal-tier-desc">X Thread + IG Reel + Newsletter feature: <strong>From $500</strong></div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <button type="button" className="btn-primary" style={{ flex: 1 }} onClick={handleCopyEmail}>
+            <div className="modal-actions">
+              <button type="button" className="btn-primary modal-action-btn" onClick={handleCopyEmail}>
                 copy email to book
               </button>
-              <a href="https://x.com/aliscodes" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ flex: 1 }}>
+              <a href="https://x.com/aliscodes" target="_blank" rel="noopener noreferrer" className="btn-secondary modal-action-btn">
                 dm on x
               </a>
             </div>
