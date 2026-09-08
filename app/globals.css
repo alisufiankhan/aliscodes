@@ -4,7 +4,7 @@
    ========================================================================== */
 
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,450,500,600,700&f[]=general-sans@400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   /* Colors */
@@ -26,8 +26,9 @@
   --border-color: #e5e7eb;
   --border-medium: #d1d5db;
   
-  /* Exact Font Stack */
+  /* Fonts */
   --font-sans: 'Satoshi', 'General Sans', 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-handwriting: 'Caveat', cursive;
   
   /* Layout */
   --max-width: 1080px;
@@ -1110,4 +1111,134 @@ body.screenbar-active .vibe-player-btn {
   background: rgba(22, 27, 34, 0.92) !important;
   border-color: #30363d !important;
   color: #f0f6fc !important;
+}
+
+/* Film Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+body.screenbar-active .grain-overlay {
+  opacity: 0.04;
+}
+
+/* Hero Live Time & Status Pill */
+.hero-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 550;
+  color: var(--text-muted);
+  margin-top: 0.55rem;
+  padding: 0.22rem 0.65rem 0.22rem 0.5rem;
+  background: #f9fafb;
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.live-status-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  animation: pulseLiveDot 2.2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseLiveDot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+body.screenbar-active .hero-live-status {
+  background: #161b22;
+  border-color: #30363d;
+  color: #8b949e;
+}
+
+/* Hero Handwritten Annotation */
+.hero-handwritten-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-handwriting);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--accent-teal);
+  margin-top: 0.65rem;
+  line-height: 1.15;
+  transform: rotate(-1.5deg);
+  text-transform: none !important;
+  letter-spacing: 0.01em;
+}
+
+.handwritten-arrow {
+  font-size: 1.25rem;
+  display: inline-block;
+  transform: translateY(-2px);
+}
+
+body.screenbar-active .hero-handwritten-note {
+  color: #fde047;
+}
+
+/* Handwritten Digital Sign-off Section */
+.handwritten-signoff-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 3.5rem 0 1rem;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.handwritten-signoff-note {
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.25;
+  transform: rotate(-1deg);
+  text-transform: none !important;
+  margin-bottom: 0.4rem;
+}
+
+.handwritten-signature {
+  font-family: var(--font-handwriting);
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transform: rotate(-2.5deg);
+  text-transform: none !important;
+  letter-spacing: -0.01em;
+}
+
+body.screenbar-active .handwritten-signoff-note {
+  color: #8b949e;
+}
+
+body.screenbar-active .handwritten-signature {
+  color: #f0f6fc;
 }

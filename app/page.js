@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from '../components/Toast';
 
 export default function Home() {
@@ -9,8 +9,48 @@ export default function Home() {
   const [hoverImage, setHoverImage] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
+  // Live time and status
+  const [localTime, setLocalTime] = useState('');
+  const [statusText, setStatusText] = useState('building software');
+
   // Modal states
   const [rateCardOpen, setRateCardOpen] = useState(false);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Karachi',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      };
+      const timeStr = new Intl.DateTimeFormat('en-US', options).format(now).toLowerCase();
+      
+      const hour24 = parseInt(
+        new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Karachi', hour: 'numeric', hour12: false }).format(now),
+        10
+      );
+
+      let status = 'shipping & testing tools';
+      if (hour24 >= 0 && hour24 <= 4) {
+        status = '2am vibe-coding';
+      } else if (hour24 > 4 && hour24 < 10) {
+        status = 'offline / resting';
+      } else if (hour24 >= 10 && hour24 < 18) {
+        status = 'building software';
+      } else {
+        status = 'filming & building';
+      }
+
+      setLocalTime(timeStr);
+      setStatusText(status);
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 15000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleCopyEmail = async () => {
     const email = 'alisufiancodes@gmail.com';
@@ -78,11 +118,20 @@ export default function Home() {
           <div className="hero-info">
             <h2 className="hero-name">ali sufian</h2>
             <p className="hero-tag">i build software and make content about ai tools</p>
+            {localTime && (
+              <div className="hero-live-status">
+                <span className="live-status-dot"></span>
+                <span>karachi • {localTime} ({statusText})</span>
+              </div>
+            )}
           </div>
         </div>
 
         <h1 className="hero-headline">
           building apps, testing ai tools, and sharing it all with <span className="highlight">80k+ people</span>.
+          <span className="hero-handwritten-note">
+            <span className="handwritten-arrow">↳</span> real builders & founders, zero hype
+          </span>
         </h1>
 
         <p className="hero-bio">
@@ -425,6 +474,12 @@ export default function Home() {
             dm on x
           </a>
         </div>
+      </div>
+
+      {/* Handwritten Digital Sign-off */}
+      <div className="handwritten-signoff-section">
+        <p className="handwritten-signoff-note">let's build something cool together</p>
+        <span className="handwritten-signature">— ali sufian</span>
       </div>
 
       {/* Media Kit / Rate Card Modal */}

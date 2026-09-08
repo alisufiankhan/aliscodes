@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ToastProvider>
+          <div className="grain-overlay" />
           <div className="ambient-night-cone" />
           <Navbar />
           <div className="container">
