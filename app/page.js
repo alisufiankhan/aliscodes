@@ -487,7 +487,7 @@ export default function Home() {
       </section>
 
       {/* 8. Footer CTA Banner */}
-      <div className="footer-cta-banner">
+      <div className="footer-cta-banner spotlight-card">
         <h2 className="footer-cta-title">got a tool you want in front of 80k people?</h2>
         <p className="footer-cta-desc">reply time is usually under a day. rate card sent on request.</p>
         <div className="footer-cta-actions">

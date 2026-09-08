@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Navbar() {
-  const [isNight, setIsNight] = useState(false);
+  const [isNight, setIsNight] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('aliscodes_nightmode');
-    if (saved === 'true') {
+    if (saved === 'false') {
+      setIsNight(false);
+      document.body.classList.remove('screenbar-active');
+    } else {
       setIsNight(true);
       document.body.classList.add('screenbar-active');
     }

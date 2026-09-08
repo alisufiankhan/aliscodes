@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="screenbar-active">
         <ToastProvider>
           <div className="grain-overlay" />
           <div className="ambient-night-cone" />
