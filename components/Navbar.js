@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 export default function Navbar() {
   const [isNight, setIsNight] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('aliscodes_nightmode');
@@ -12,6 +13,12 @@ export default function Navbar() {
       setIsNight(true);
       document.body.classList.add('screenbar-active');
     }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleNightMode = () => {
@@ -27,7 +34,7 @@ export default function Navbar() {
   };
 
   return (
-    <header>
+    <header className={scrolled ? 'header-scrolled' : ''}>
       <div className="container nav-container">
         <Link href="/" className="logo">
           ali sufian

@@ -73,13 +73,21 @@ pre, code {
   padding: 0 1.5rem;
 }
 
-/* Header / Navbar */
+/* Header / Navbar - Seamlessly blended into Hero */
 header {
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  border-bottom: 1px solid transparent;
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+header.header-scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .nav-container {
@@ -1031,9 +1039,17 @@ body.screenbar-active {
 }
 
 body.screenbar-active header {
-  background: rgba(13, 17, 23, 0.85) !important;
-  border-bottom-color: #30363d !important;
-  backdrop-filter: blur(12px);
+  background: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.screenbar-active header.header-scrolled {
+  background: rgba(13, 17, 23, 0.88) !important;
+  border-bottom: 1px solid #30363d !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
 }
 
 body.screenbar-active .logo {
@@ -1265,7 +1281,7 @@ body.screenbar-active .hero-seconds-pill {
 }
 
 body.screenbar-active .hero-seconds-pill .seconds-val {
-  color: #fde047 !important;
+  color: #fbbf24 !important;
 }
 
 /* Hero Embedded Handwriting Accent */
@@ -1283,8 +1299,8 @@ body.screenbar-active .hero-seconds-pill .seconds-val {
 }
 
 body.screenbar-active .hero-handwriting-accent {
-  color: #fde047 !important;
-  text-shadow: 0 0 16px rgba(253, 224, 71, 0.3);
+  color: #fbbf24 !important;
+  text-shadow: none !important;
 }
 
 /* Handwritten Digital Sign-off Section */
