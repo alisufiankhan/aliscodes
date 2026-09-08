@@ -9,6 +9,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const saved = localStorage.getItem('aliscodes_nightmode');
+    // Default mode is black mode. Switch to daylight mode only if explicitly saved as 'false'.
     if (saved === 'false') {
       setIsNight(false);
       document.body.classList.remove('screenbar-active');

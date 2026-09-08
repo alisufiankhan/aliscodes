@@ -61,14 +61,14 @@ body {
   text-transform: lowercase;
 }
 
+/* Daylight mode support when user explicitly toggles off black mode */
 body:not(.screenbar-active) {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
 }
 
 html:has(body:not(.screenbar-active)) {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
 }
 
 pre, code {
@@ -619,7 +619,7 @@ section {
   }
 }
 
-/* Footer Banner CTA - Matches Site Card System */
+/* Footer Banner CTA - Harmonized with site cards */
 .footer-cta-banner {
   background-color: #161b22;
   border: 1px solid #30363d;
@@ -627,8 +627,14 @@ section {
   padding: 2.75rem 2rem;
   text-align: center;
   margin: 1.5rem 0 2.5rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-cta-banner:hover {
+  border-color: #484f58;
 }
 
 .footer-cta-title {
@@ -650,6 +656,7 @@ section {
   display: flex;
   justify-content: center;
   gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .btn-banner-white {
@@ -661,18 +668,16 @@ section {
   border: 1px solid var(--accent-teal);
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.15s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(12, 110, 120, 0.25);
 }
 
 .btn-banner-white:hover {
   background: var(--accent-teal-hover);
   border-color: var(--accent-teal-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(12, 110, 120, 0.4);
 }
 
 .btn-banner-dark {
@@ -684,48 +689,42 @@ section {
   border: 1px solid #30363d;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  transition: all 0.15s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
 }
 
 .btn-banner-dark:hover {
-  background: #30363d;
   border-color: #484f58;
+  background: #30363d;
   transform: translateY(-1px);
 }
 
-/* Light mode overrides if switched */
+/* Daylight mode support for footer banner */
 body:not(.screenbar-active) .footer-cta-banner {
-  background-color: #f9fafb;
-  border-color: var(--border-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background-color: #f9fafb !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
 }
 
 body:not(.screenbar-active) .footer-cta-title {
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
 }
 
 body:not(.screenbar-active) .footer-cta-desc {
-  color: var(--text-muted);
-}
-
-body:not(.screenbar-active) .btn-banner-white {
-  background: var(--accent-teal);
-  color: #ffffff;
-  border-color: var(--accent-teal);
+  color: var(--text-muted) !important;
 }
 
 body:not(.screenbar-active) .btn-banner-dark {
-  background: #ffffff;
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  background: #ffffff !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-medium) !important;
 }
 
 body:not(.screenbar-active) .btn-banner-dark:hover {
-  background: #f3f4f6;
-  border-color: var(--border-medium);
+  background: #f3f4f6 !important;
+  border-color: var(--border-color) !important;
 }
 
 /* Footer Links */
@@ -1134,7 +1133,8 @@ body.screenbar-active .brands-title {
 }
 
 body.screenbar-active .work-card,
-body.screenbar-active .project-row {
+body.screenbar-active .project-row,
+body.screenbar-active .footer-cta-banner {
   background: #161b22 !important;
   border-color: #30363d !important;
 }
