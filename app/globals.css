@@ -794,7 +794,7 @@ footer {
 
 .social-link {
   color: var(--text-muted);
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, transform 0.15s ease;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -803,6 +803,7 @@ footer {
 
 .social-link:hover {
   color: var(--text-primary);
+  transform: translateY(-2px);
 }
 
 .footer-copy {
@@ -1275,8 +1276,22 @@ body.screenbar-active .brand-chip {
 
 body.screenbar-active .stats-container,
 body.screenbar-active .stat-cell,
-body.screenbar-active .divider {
+body.screenbar-active .divider,
+body.screenbar-active footer {
   border-color: #30363d !important;
+}
+
+body.screenbar-active .social-link {
+  color: #8b949e !important;
+}
+
+body.screenbar-active .social-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+body.screenbar-active .footer-copy {
+  color: #8b949e !important;
 }
 
 body.screenbar-active .love-chip {
