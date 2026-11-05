@@ -457,6 +457,19 @@ export default function Home() {
               label: 'porsche 911 gt3',
               image: '/assets/porsche 911.png',
             },
+            {
+              id: 'somemore',
+              icon: (
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              ),
+              label: 'some more',
+              hoverType: 'text',
+              text: 'i love everything that ollie loves...',
+              image: '/assets/panda.png',
+            },
           ].map((item) => (
             <div
               key={item.id}
@@ -466,15 +479,25 @@ export default function Home() {
               onClick={() => {
                 if (item.id === 'vibecoding') {
                   window.dispatchEvent(new CustomEvent('toggle-vibecoding-audio'));
+                } else {
+                  setHoverImage(hoverImage === item.image ? null : item.image);
                 }
               }}
               style={item.id === 'vibecoding' ? { cursor: 'pointer' } : {}}
               title={item.id === 'vibecoding' ? 'Click to toggle 2am vibe-coding mode 🎧' : undefined}
             >
               {hoverImage === item.image && (
-                <div className="love-card-popup">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.image} alt={item.label} className="love-card-img" />
+                <div className={`love-card-popup ${item.hoverType === 'text' ? 'love-card-text-popup' : ''}`}>
+                  {item.hoverType === 'text' ? (
+                    <div className="love-card-text-content">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.image} alt="panda" className="love-card-panda-img" />
+                      <span className="love-card-quote">{item.text}</span>
+                    </div>
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={item.image} alt={item.label} className="love-card-img" />
+                  )}
                 </div>
               )}
               <div className="love-chip">

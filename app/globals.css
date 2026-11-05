@@ -94,10 +94,10 @@ header {
 }
 
 header.header-scrolled {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--border-color);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .nav-container {
@@ -585,11 +585,11 @@ section {
   transform: translateX(-50%);
   z-index: 100;
   width: max-content;
-  max-width: 360px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 6px;
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+  max-width: 250px;
+  background: #ffffff !important;
+  border-radius: 14px;
+  padding: 5px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18), 0 3px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid #e5e7eb;
   pointer-events: none;
   animation: popupFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -599,13 +599,64 @@ section {
 }
 
 .love-card-img {
-  max-width: 340px;
-  max-height: 210px;
+  max-width: 230px;
+  max-height: 140px;
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 10px;
   display: block;
+  background-color: #ffffff;
+}
+
+.love-card-text-popup {
+  padding: 8px 14px;
+  max-width: 280px;
+  border-radius: 14px;
+  background: #ffffff !important;
+}
+
+.love-card-text-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.love-card-panda-img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
+  animation: pandaWiggle 2.4s ease-in-out infinite;
+}
+
+@keyframes pandaWiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-7deg) scale(1.05);
+  }
+  40% {
+    transform: rotate(7deg) scale(1.05);
+  }
+  60% {
+    transform: rotate(-3deg) scale(1.02);
+  }
+  80% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.love-card-quote {
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #111827 !important;
+  letter-spacing: -0.01em;
+  white-space: normal;
 }
 
 @keyframes popupFadeIn {
@@ -1138,7 +1189,8 @@ body.screenbar-active .nav-theme-toggle:hover {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 90vh;
   pointer-events: none;
   background: radial-gradient(
@@ -1231,6 +1283,28 @@ body.screenbar-active .love-chip {
   background: #161b22 !important;
   border-color: #30363d !important;
   color: #c9d1d9 !important;
+}
+
+body.screenbar-active .love-chip-wrapper:hover .love-chip,
+body.screenbar-active .love-chip-wrapper.active .love-chip {
+  border-color: #f0f6fc !important;
+  color: #f0f6fc !important;
+  box-shadow: 0 0 0 1px #f0f6fc !important;
+}
+
+body.screenbar-active .love-chip-wrapper:hover .love-chip-icon,
+body.screenbar-active .love-chip-wrapper.active .love-chip-icon {
+  color: #f0f6fc !important;
+}
+
+body.screenbar-active .love-card-popup {
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.screenbar-active .love-card-quote {
+  color: #111827 !important;
 }
 
 body.screenbar-active .spotlight-card::after {
@@ -1670,12 +1744,26 @@ body.screenbar-active .handwritten-signature {
   }
 
   .love-card-popup {
-    max-width: min(280px, 82vw);
+    max-width: min(220px, 80vw);
+  }
+
+  .love-card-text-popup {
+    padding: 7px 11px;
+    max-width: min(250px, 84vw);
+  }
+
+  .love-card-panda-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .love-card-quote {
+    font-size: 0.82rem;
   }
 
   .love-card-img {
-    max-width: min(260px, 78vw);
-    max-height: 150px;
+    max-width: min(200px, 75vw);
+    max-height: 110px;
   }
 
   /* Handwritten Sign-off */
