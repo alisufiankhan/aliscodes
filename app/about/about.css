@@ -1,0 +1,155 @@
+/* About page (light defaults use design tokens; dark overrides under body.screenbar-active) */
+.about-article {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+  color: var(--text-primary);
+}
+
+.about-back {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+.about-back:hover { color: var(--accent-teal); }
+
+.about-header {
+  /* override the global `header` rule (sticky navbar) that matches any <header> element */
+  position: static;
+  z-index: auto;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.about-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+.about-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+.about-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0.15rem 0 0.4rem;
+}
+.about-lede {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+.about-facts > div {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.about-facts > div:nth-child(odd) { border-right: 1px solid var(--border-color); }
+.about-facts > div:nth-last-child(-n + 2) { border-bottom: none; }
+.about-facts dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.about-facts dd { font-weight: 600; margin-top: 0.15rem; }
+
+.about-body h2,
+.about-faq h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 2.25rem 0 0.75rem;
+}
+.about-body p,
+.about-body li {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.about-body p + p { margin-top: 0.9rem; }
+.about-body ul { padding-left: 1.2rem; display: grid; gap: 0.45rem; }
+.about-body a,
+.about-faq a {
+  color: var(--accent-teal);
+  text-underline-offset: 3px;
+}
+.about-body strong { color: var(--text-primary); }
+
+.about-faq { margin-top: 1rem; }
+.about-faq details {
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.9rem 0;
+}
+.about-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+.about-faq summary::-webkit-details-marker { display: none; }
+.about-faq summary::after { content: '+'; float: right; color: var(--text-muted); }
+.about-faq details[open] summary::after { content: '–'; }
+.about-faq details p {
+  margin-top: 0.6rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.about-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+/* Dark (2am) mode */
+body.screenbar-active .about-article,
+body.screenbar-active .about-title,
+body.screenbar-active .about-facts dd,
+body.screenbar-active .about-body h2,
+body.screenbar-active .about-faq h2,
+body.screenbar-active .about-faq summary,
+body.screenbar-active .about-body strong { color: #f0f6fc; }
+body.screenbar-active .about-lede,
+body.screenbar-active .about-body p,
+body.screenbar-active .about-body li,
+body.screenbar-active .about-faq details p { color: #c9d1d9; }
+body.screenbar-active .about-back,
+body.screenbar-active .about-facts dt,
+body.screenbar-active .about-faq summary::after { color: #8b949e; }
+body.screenbar-active .about-facts,
+body.screenbar-active .about-facts > div,
+body.screenbar-active .about-faq details,
+body.screenbar-active .about-avatar { border-color: #30363d; }
+body.screenbar-active .about-kicker,
+body.screenbar-active .about-body a,
+body.screenbar-active .about-back:hover { color: #4fd1c5; }
+
+@media (max-width: 560px) {
+  .about-article { padding-top: 2rem; }
+  .about-header { flex-direction: column; align-items: flex-start; }
+  .about-title { font-size: 2rem; }
+  .about-facts { grid-template-columns: 1fr; }
+  .about-facts > div:nth-child(odd) { border-right: none; }
+  .about-facts > div:nth-last-child(2) { border-bottom: 1px solid var(--border-color); }
+  body.screenbar-active .about-facts > div:nth-last-child(2) { border-bottom-color: #30363d; }
+}

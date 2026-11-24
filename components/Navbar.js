@@ -45,9 +45,10 @@ export default function Navbar() {
         </Link>
         <nav>
           <ul>
-            <li className="nav-link-desktop"><a href="#work">work</a></li>
-            <li className="nav-link-desktop"><a href="#built">built</a></li>
-            <li className="nav-link-desktop"><a href="#rates">rates</a></li>
+            <li className="nav-link-desktop"><a href="/#work">work</a></li>
+            <li className="nav-link-desktop"><a href="/#built">built</a></li>
+            <li className="nav-link-desktop"><a href="/#rates">rates</a></li>
+            <li className="nav-link-desktop"><Link href="/about">about</Link></li>
             <li>
               <button
                 type="button"
