@@ -93,11 +93,18 @@ header {
   transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
 }
 
+/* Page-content <header> elements must not inherit the sticky navbar behavior above */
+.story-header,
+.about-header {
+  position: static;
+  z-index: auto;
+}
+
 header.header-scrolled {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid var(--border-color);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .nav-container {
@@ -1224,10 +1231,10 @@ body.screenbar-active header {
 }
 
 body.screenbar-active header.header-scrolled {
-  background: rgba(13, 17, 23, 0.88) !important;
+  background: rgba(13, 17, 23, 0.97) !important;
   border-bottom: 1px solid #30363d !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
 }
 
 body.screenbar-active .logo {

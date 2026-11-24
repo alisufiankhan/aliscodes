@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-copy">
-          <p>&copy; 2026 ali sufian &bull; all rights reserved</p>
+          <p>&copy; 2026 ali sufian &bull; <a href="/about" style={{ color: 'inherit' }}>about</a> &bull; all rights reserved</p>
         </div>
       </div>
     </footer>
