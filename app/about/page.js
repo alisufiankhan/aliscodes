@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE_URL, PERSON, personJsonLd } from '../../lib/site';
+import { SITE_URL, PERSON, BRANDS, personJsonLd } from '../../lib/site';
 import './about.css';
 
 export const metadata = {
@@ -19,11 +19,6 @@ export const metadata = {
     username: 'aliscodes',
   },
 };
-
-const BRANDS = [
-  'Lovable', 'Luma AI', 'Magnific', 'PixVerse', 'Airtable', 'HeyGen',
-  'Kling', 'Gamma', 'MiniMax', 'Sintra', 'Higgsfield',
-];
 
 const FAQ = [
   {
