@@ -47,6 +47,9 @@ export const metadata = {
     images: ['/assets/profile.png'],
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: 'kp_sfUKEbyvcRO7R7XY-YoLJybKgLaYmXEinsaqexqI',
+  },
   icons: {
     icon: '/assets/profile.png',
   },
